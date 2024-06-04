@@ -27,6 +27,23 @@
                 }
             }
         </style>
+
+        <!-- Google Web Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Saira:wght@500;600;700&display=swap" rel="stylesheet"> 
+
+        <!-- Icon Font Stylesheet -->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+        <!-- Libraries Stylesheet -->
+        <link href="lib/animate/animate.min.css" rel="stylesheet">
+        <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+
+        <!-- Customized Bootstrap Stylesheet -->
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+
     </head>
     <body class="antialiased">
         <div class="relative sm:flex sm:justify-center sm:items-center min-h-screen bg-dots-darker bg-center bg-gray-100 selection:bg-red-500 selection:text-white">
@@ -78,16 +95,47 @@
                     </div>
                 </div>
 
-                <div class="flex justify-center mt-16 px-0 sm:items-center sm:justify-between">
-                    <div class="text-center text-sm text-gray-500 sm:text-left">
-                        <div class="flex items-center gap-4">
-                            
-                        </div>
+                <div class="mt-16">
+                    <div class="container-fluid py-5 mb-5">
+                        <div class="container">
+                            <div class="row g-5">
+                                <div class="col-lg-12 wow fadeIn" data-wow-delay=".5s">
+                                    <form action="{{ url("/mensagensInicial") }}" method="POST">
+                                        @csrf
+                                        <div class="p-5 rounded contact-form">
+                                            <div class="mb-4">
+                                                <input type="text" class="form-control border-0 py-3" placeholder="Seu Nome"
+                                                name="nome" id="nome" required>
+                                            </div>
+                                            <div class="mb-4">
+                                                <input type="email" class="form-control border-0 py-3" placeholder="Seu e-mail"
+                                                name="email" id="email" required>
+                                            </div>
+                                            <div class="mb-4">
+                                                <input type="text" class="form-control border-0 py-3" placeholder="Projeto"
+                                                name="projeto" id="projeto" required>
+                                            </div>
+                                            <div class="mb-4">
+                                                <textarea class="w-100 form-control border-0 py-3" rows="6" cols="10" placeholder="Mensagem"
+                                                name="conteudo" id="conteudo" required></textarea>
+                                            </div>
+                                            <div class="text-start">
+                                                <button class="btn bg-primary text-white py-3 px-5" type="submit">Enviar mensagem</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div> 
                     </div>
 
                     
                 </div>
             </div>
+            
+            
         </div>
+
+        
     </body>
 </html>

@@ -42,7 +42,7 @@
         </tbody>
     </table>
     @else
-    <p>Você ainda não tem perguntas, <a href="{{ url("/clientes/create") }}">Criar novo cliente</a></p>
+    <p>Você ainda não tem clientes cadastrados, <a href="{{ url("/clientes/create") }}">Criar novo cliente</a></p>
     @endif
     <div class="row">
         <div class="col-12 col-xl-4">
