@@ -44,6 +44,60 @@
         <!-- Customized Bootstrap Stylesheet -->
         <link href="css/bootstrap.min.css" rel="stylesheet">
 
+        <meta name="csrf-token" content="{{ csrf_token() }}">
+        <script>
+            function enviarMensagem() {
+                var nome = document.getElementById('nome').value;
+                var email = document.getElementById('email').value;
+                var projeto = document.getElementById('projeto').value;
+                var conteudo = document.getElementById('conteudo').value;
+                var setor = document.getElementById('setor').value;
+
+                if (nome == '' || email == '' || projeto == '' || conteudo == '') {
+                    alert('Preencha todos os campos!');
+                    return false;
+                }
+
+                // Obtendo o token CSRF do meta tag
+                var tokenElement = document.head.querySelector('meta[name="csrf-token"]');
+                if (!tokenElement) {
+                    alert('Token CSRF não encontrado. Certifique-se de que a página inclui o meta tag csrf-token.');
+                    return false;
+                }
+                
+                var token = tokenElement.content;
+
+                // Criando um objeto FormData para enviar os dados
+                var formData = new FormData();
+                formData.append('_token', token); // Adicionando o token CSRF
+                formData.append('nome', nome);
+                formData.append('email', email);
+                formData.append('projeto', projeto);
+                formData.append('conteudo', conteudo);
+                formData.append('setor', setor);
+
+                // Enviando os dados para a rota via AJAX
+                var xhr = new XMLHttpRequest();
+                xhr.open('POST', '/mensagensInicial');
+                xhr.onload = function () {
+                    if (xhr.status === 200) {
+                        // Manipule a resposta aqui, se necessário
+                        alert('Mensagem enviada com sucesso!');
+                        //limpe os campos
+                        document.getElementById('nome').value = '';
+                        document.getElementById('email').value = '';
+                        document.getElementById('projeto').value = '';
+                        document.getElementById('conteudo').value = '';
+
+                    } else {
+                        alert('Ocorreu um erro ao enviar a mensagem. Tente novamente mais tarde.');
+                    }
+                };
+                xhr.send(formData);
+            }
+        </script>
+        
+
     </head>
     <body class="antialiased">
         <div class="relative sm:flex sm:justify-center sm:items-center min-h-screen bg-dots-darker bg-center bg-gray-100 selection:bg-red-500 selection:text-white">
@@ -100,8 +154,7 @@
                         <div class="container">
                             <div class="row g-5">
                                 <div class="col-lg-12 wow fadeIn" data-wow-delay=".5s">
-                                    <form action="{{ url("/mensagensInicial") }}" method="POST">
-                                        @csrf
+                                    
                                         <div class="p-5 rounded contact-form">
                                             <div class="mb-4">
                                                 <input type="text" class="form-control border-0 py-3" placeholder="Seu Nome"
@@ -119,11 +172,21 @@
                                                 <textarea class="w-100 form-control border-0 py-3" rows="6" cols="10" placeholder="Mensagem"
                                                 name="conteudo" id="conteudo" required></textarea>
                                             </div>
+                                            {{-- faça um campo select com as opções de setores --}}
+                                            <div class="mb-4">
+                                                <select class="form-select border-0 py-3" name="setor" id="setor" required>
+                                                    <option value="">Selecione o Setor</option>
+                                                    @foreach ($setores as $setor)
+                                                        <option value="{{ $setor->id }}">{{ $setor->nomeSetor }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+
                                             <div class="text-start">
-                                                <button class="btn bg-primary text-white py-3 px-5" type="submit">Enviar mensagem</button>
+                                                <button class="btn bg-primary text-white py-3 px-5" onclick="enviarMensagem()">Enviar mensagem</button>
                                             </div>
                                         </div>
-                                    </form>
+                                                                       
                                 </div>
                             </div>
                         </div> 

@@ -30,6 +30,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'setor_id'
     ];
 
     /**
@@ -65,5 +66,10 @@ class User extends Authenticatable
     public function roles()
     {
         return $this->belongsToMany(Role::class);
+    }
+
+    public function setor()
+    {
+        return $this->belongsTo(Setor::class);
     }
 }

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
 use App\Models\User;
+use App\Models\Setor;
 use Spatie\Permission\Models\Permission;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
@@ -36,10 +37,11 @@ class UsersController extends Controller
         $permission = Permission::where('name', 'view users')->first();
 
         $users = User::all();
+        $setores = Setor::all();
 
         if ($userEncontrado->hasPermissionTo($permission)) {
             // O usuário tem a permissão 'view users', permita a visualização de usuários
-            return view('users.users', ['users' => $users, 'user'=> $user]);
+            return view('users.users', ['users' => $users, 'user'=> $user, 'setores' => $setores]);
         } else {
             // O usuário não tem a permissão 'view users', redirecionar para a página de erro 403
             return abort(403, 'Unauthorized');
@@ -51,6 +53,7 @@ class UsersController extends Controller
         $user = auth()->user();
         $userEncontrado = User::findOrFail($user->id);
         $users = User::all();
+        $setores = Setor::all();
 
         //$permission = Permission::where('name', 'view users')->first();
         //$userEncontrado->givePermissionTo($permission); //Criar uma tela de gerenciamento de perfil para o usuário
@@ -58,7 +61,7 @@ class UsersController extends Controller
         try {
             if (true) {//Gate::authorize('view users', $userEncontrado)
                 
-                return view('users.users', ['users' => $users, 'user'=> $user]);
+                return view('users.users', ['users' => $users, 'user'=> $user, 'setores' => $setores]);
         }
         } catch (\Throwable $th) {
             return view('unauthorized', ['user'=> $user]);
@@ -69,7 +72,8 @@ class UsersController extends Controller
     public function create()
     {
         $user = auth()->user();
-        return view('users.createUser', ['user'=> $user]);
+        $setores = Setor::all();
+        return view('users.createUser', ['user'=> $user, 'setores' => $setores]);
     }
 
     public function naoAutorizado()
@@ -94,8 +98,9 @@ class UsersController extends Controller
 
         $user->name = $request->name;
         $user->email = $request->email;
-        $user->password = Hash::make($request->password) ;
-    
+        $user->password = Hash::make($request->password);
+        $user->setor_id = $request->setor_id;
+        
         $user->save();
 
         return redirect('/users/users')->with('msg', 'Usuário criado com sucesso!');
@@ -105,8 +110,9 @@ class UsersController extends Controller
     {
         $user = auth()->user();
         $users = User::findOrFail($id);
+        $setores = Setor::all();
 
-        return view('users.show', ['users' => $users, 'user'=> $user]);
+        return view('users.show', ['users' => $users, 'user'=> $user, 'setores' => $setores]);
     }
 
     public function destroy($id)
@@ -119,10 +125,11 @@ class UsersController extends Controller
     public function edit($id)
     {
         $user = auth()->user();
+        $setores = Setor::all();
 
         $usuarioEditado = User::findOrFail($id);
 
-        return view('users.editUser', ['usuarioEditado' => $usuarioEditado, 'user'=> $user]);
+        return view('users.editUser', ['usuarioEditado' => $usuarioEditado, 'user'=> $user, 'setores' => $setores]);
     }
 
     public function editPerfil($id)
@@ -211,7 +218,8 @@ class UsersController extends Controller
         $data = array(
             "name"=> $request->name,
             "email"=> $request->email,
-            "password"=> Hash::make($request->password)
+            "password"=> Hash::make($request->password), 
+            "setor_id"=> $request->setor_id,
         );
 
         $regras = [

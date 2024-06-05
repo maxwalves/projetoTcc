@@ -11,5 +11,15 @@ class Cliente extends Model
 
     protected $table = 'clientes';
 
-    protected $fillable = ['nome', 'email', 'telefone', 'dataCriacao'];
+    protected $fillable = ['nome', 'email', 'telefone', 'dataCriacao', 'setor_id', 'usuario_id'];
+
+    public function usuario()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function setor()
+    {
+        return $this->belongsTo(Setor::class);
+    }
 }

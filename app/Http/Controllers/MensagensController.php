@@ -4,13 +4,22 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Mensagem;
+use App\Models\Setor;
 
 class MensagensController extends Controller
 {
     public function index()
     {
+        $userAuth = auth()->user();
         $mensagens = Mensagem::all();
-        return view('mensagens.index', compact('mensagens'));
+        
+        $setores = Setor::all();
+
+        $mensagens = $mensagens->filter(function ($mensagem) use ($userAuth) {
+            return $mensagem->setor_id == $userAuth->setor_id;
+        });
+        
+        return view('mensagens.index', compact('mensagens', 'setores'));
     }
 
     public function create()
@@ -40,12 +49,13 @@ class MensagensController extends Controller
         $mensagem->email = $request->email;
         $mensagem->projeto = $request->projeto;
         $mensagem->conteudo = $request->conteudo;
+        $mensagem->setor_id = $request->setor;
         
         $dataCriacao = new \DateTime('now', new \DateTimeZone('America/Sao_Paulo'));
         $mensagem->dataCriacao = $dataCriacao->format('Y-m-d H:i:s');
         $mensagem->save();
         
-        return redirect('/')->with('success', 'Mensagem enviada com sucesso.');
+        return "Sucesso";
     }
 
     public function show($id)

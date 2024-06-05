@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Cliente;
 use Illuminate\Http\Request;
+use App\Models\User;
+use App\Models\Setor;
 
 class ClientesController extends Controller
 {
@@ -21,12 +23,21 @@ class ClientesController extends Controller
     {
         $user = auth()->user();
         $clientes = Cliente::all();
-        return view('clientes.index', compact('clientes', 'user'));
+        $usuarios = User::all();
+        $setores = Setor::all();
+
+        $clientes = $clientes->filter(function ($cliente) use ($user) {
+            return $cliente->setor_id == $user->setor_id;
+        });
+
+        return view('clientes.index', compact('clientes', 'user', 'usuarios', 'setores'));
     }
 
     public function create()
     {
-        return view('clientes.create');
+        $usuarios = User::all();
+        $setores = Setor::all();
+        return view('clientes.create', compact('usuarios', 'setores'));
     }
 
     public function store(Request $request)
@@ -37,6 +48,8 @@ class ClientesController extends Controller
         $cliente->telefone = $request->telefone;
         $dataCriacao = new \DateTime('now', new \DateTimeZone('America/Sao_Paulo'));
         $cliente->dataCriacao = $dataCriacao->format('Y-m-d H:i:s');
+        $cliente->usuario_id = $request->usuario_id;
+        $cliente->setor_id = $request->setor_id;
 
         $cliente->save();
         
@@ -52,7 +65,9 @@ class ClientesController extends Controller
     public function edit($id)
     {
         $cliente = Cliente::findOrFail($id);
-        return view('clientes.edit', compact('cliente'));
+        $usuarios = User::all();
+        $setores = Setor::all();
+        return view('clientes.edit', compact('cliente', 'usuarios', 'setores'));
     }
 
     public function update(Request $request, $id)

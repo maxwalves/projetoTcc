@@ -23,6 +23,22 @@
             <label for="telefone">Telefone:</label>
             <input type="text" class="form-control" name="telefone" id="telefone" value="{{ $cliente->telefone }}" required>
         </div>
+        <div class="form-group">
+            <label for="usuario_id">Usuário:</label>
+            <select class="form-control" name="usuario_id" id="usuario_id" required>
+                @foreach($usuarios as $usuario)
+                    <option value="{{ $usuario->id }}" {{ $cliente->usuario_id == $usuario->id ? 'selected' : '' }}>{{ $usuario->name }}</option>
+                @endforeach
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="setor_id">Setor:</label>
+            <select class="form-control" name="setor_id" id="setor_id" required>
+                @foreach($setores as $setor)
+                    <option value="{{ $setor->id }}" {{ $cliente->setor_id == $setor->id ? 'selected' : '' }}>{{ $setor->nomeSetor }}</option>
+                @endforeach
+            </select>
+        </div>
         <button type="submit" class="btn btn-primary">Salvar</button>
         <a href="{{ url("/clientes") }}" class="btn btn-secondary">Cancelar</a>
     </form>

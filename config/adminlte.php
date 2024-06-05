@@ -312,6 +312,12 @@ return [
             'can'  => 'manage-blog',
         ],
         [
+            'text'        => 'Gerenciar Setores',
+            'url'         => 'setores',
+            'icon'        => 'far fa-fw fa-file',
+            'label_color' => 'success',
+        ],
+        [
             'text'        => 'Gerenciar Clientes',
             'url'         => 'clientes',
             'icon'        => 'far fa-fw fa-file',

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\FAQ;
+use App\Models\Setor;
 use Illuminate\Http\Request;
 
 class FaqController extends Controller
@@ -10,7 +11,8 @@ class FaqController extends Controller
     public function welcome()
     {
         $faqs = FAQ::all();
-        return view('welcome', compact('faqs'));
+        $setores = Setor::all();
+        return view('welcome', compact('faqs', 'setores'));
     }
 
     public function sobre()

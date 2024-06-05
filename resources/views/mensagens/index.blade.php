@@ -18,6 +18,7 @@
                 <th>E-mail</th>
                 <th>Projeto</th>
                 <th>Conteúdo</th>
+                <th>Setor</th>
                 <th>Data de criação</th>
                 <th>Ações</th>
             </tr>
@@ -25,15 +26,16 @@
         <tbody>
             @foreach($mensagens as $mensagem)
             <tr>
-                <td>{{$mensagem->nome}}</td>
-                <td>{{$mensagem->email}}</td>
-                <td>{{$mensagem->projeto}}</td>
-                <td>{{$mensagem->conteudo}}</td>
-                <td>{{ date('d/m/Y', strtotime($mensagem->dataCriacao)) }}</td>
+                <td>{{ $mensagem->nome }}</td>
+                <td>{{ $mensagem->email }}</td>
+                <td>{{ $mensagem->projeto }}</td>
+                <td>{{ $mensagem->conteudo }}</td>
+                <td>{{ $mensagem->setor ? $mensagem->setor->nomeSetor : 'Sem setor' }}</td>
+                <td>{{ date('d/m/Y', strtotime($mensagem->created_at)) }}</td>
                 <td>
                     <div class="btn-group">
                         <a href="{{ url("/mensagens/".$mensagem->id) }}" class="btn btn-primary btn-sm">Detalhes</a>
-                        <a href="{{ url("/mensagens/edit/".$mensagem->id) }}" class="btn btn-success btn-sm">Editar</a>
+                        {{-- <a href="{{ url("/mensagens/edit/".$mensagem->id) }}" class="btn btn-success btn-sm">Editar</a> --}}
                         <form action="{{ url("/mensagens/".$mensagem->id) }}" method="POST">
                             @method('DELETE')
                             @csrf
@@ -48,11 +50,11 @@
     @else
     <p>Você ainda não tem mensagens, <a href="{{ url("/mensagens/create") }}">Criar nova mensagem</a></p>
     @endif
-    <div class="row">
+    {{-- <div class="row">
         <div class="col-12 col-xl-4">
             <a class="btn btn-success btn-lg" href="{{ url("/mensagens/create") }}">Criar nova mensagem</a>
         </div>
-    </div>
+    </div> --}}
 </div>
 
 @stop

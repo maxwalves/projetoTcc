@@ -1,41 +1,32 @@
 @extends('adminlte::page')
 
-@section('title', 'Clientes')
+@section('title', 'Setores')
 
 @section('content_header')
-    <h1>Gerenciar Clientes</h1>
+    <h1>Gerenciar Setores</h1>
 @stop
 
 @section('content')
 
 <div class="col-md-10 offset-md-1 dashboard-avs-container">
-    @if(count($clientes) > 0)
+    @if(count($setores) > 0)
 
     <table id="tabela" class="table table-striped table-hover" style="width:100%">
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Nome</th>
-                <th>E-mail</th>
-                <th>Telefone</th>
-                <th>Data de criação</th>
-                <th>Usuário vinculado atual</th>
-                <th>Setor vinculado atual</th>
+                <th>Nome do Setor</th>
+                <th>Ações</th>
             </tr>
         </thead>
         <tbody>
-            @foreach($clientes as $cliente)
+            @foreach($setores as $setor)
             <tr>
-                <td>{{$cliente->id}}</td>
-                <td>{{$cliente->nome}}</td>
-                <td>{{$cliente->email}}</td>
-                <td>{{$cliente->telefone}}</td>
-                <td>{{ date('d/m/Y', strtotime($cliente->dataCriacao)) }}</td>
-                <td>{{$cliente->usuario->name}}</td>
-                <td>{{$cliente->setor->nomeSetor}}</td>
+                <td>{{ $setor->id }}</td>
+                <td>{{ $setor->nomeSetor }}</td>
                 <td>
-                    <a href="{{ url("/clientes/edit/".$cliente->id) }}" class="btn btn-success btn-sm">Editar</a>
-                    <form action="{{ url("/clientes/".$cliente->id) }}" method="POST">
+                    <a href="{{ url("/setores/edit/".$setor->id) }}" class="btn btn-success btn-sm">Editar</a>
+                    <form action="{{ url("/setores/".$setor->id) }}" method="POST" style="display:inline-block;">
                         @method('DELETE')
                         @csrf
                         <button type="submit" class="btn btn-danger btn-sm">Remover</button>
@@ -46,11 +37,11 @@
         </tbody>
     </table>
     @else
-    <p>Você ainda não tem clientes cadastrados, <a href="{{ url("/clientes/create") }}">Criar novo cliente</a></p>
+    <p>Você ainda não tem setores cadastrados, <a href="{{ url("/setores/create") }}">Criar novo setor</a></p>
     @endif
     <div class="row">
         <div class="col-12 col-xl-4">
-            <a class="btn btn-success btn-lg" href="{{ url("/clientes/create") }}">Criar novo cliente</a>
+            <a class="btn btn-success btn-lg" href="{{ url("/setores/create") }}">Criar novo setor</a>
         </div>
     </div>
 </div>
@@ -64,21 +55,21 @@
 @section('js')
     <script>
         $(document).ready( function () {
-            if("{{ session('success') }}" == "Cliente criado com sucesso."){
+            if("{{ session('success') }}" == "Setor criado com sucesso."){
                 Swal.fire(
                     'Sucesso!',
                     "{{ session('success') }}",
                     'success'
                 )
             }
-            else if("{{ session('success') }}" == "Cliente atualizado com sucesso!"){
+            else if("{{ session('success') }}" == "Setor atualizado com sucesso!"){
                 Swal.fire(
                     'Sucesso!',
                     "{{ session('success') }}",
                     'success'
                 )
             }
-            else if("{{ session('success') }}" == "Cliente removido com sucesso."){
+            else if("{{ session('success') }}" == "Setor removido com sucesso."){
                 Swal.fire(
                     'Sucesso!',
                     "{{ session('success') }}",
