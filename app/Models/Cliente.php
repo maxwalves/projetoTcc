@@ -22,4 +22,14 @@ class Cliente extends Model
     {
         return $this->belongsTo(Setor::class);
     }
+
+    public function historicos()
+    {
+        return $this->hasMany(Historico::class);
+    }
+
+    public function avaliacoes()
+    {
+        return $this->hasMany(AvaliacaoCliente::class);
+    }
 }

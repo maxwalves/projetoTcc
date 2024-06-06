@@ -8,6 +8,11 @@ use App\Http\Controllers\FaqController;
 use App\Http\Controllers\MensagensController;
 use App\Models\Faq;
 use App\Http\Controllers\SetorController;
+use App\Http\Controllers\FormularioAvaliacaoController;
+use App\Http\Controllers\CampoController;
+use App\Http\Controllers\AvaliacaoClienteController;
+use App\Http\Controllers\RespostaController;
+use App\Http\Controllers\HistoricoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -97,3 +102,48 @@ Route::get('/mensagens/edit/{id}', [MensagensController::class, 'edit'])->middle
 Route::put('/mensagens/{id}', [MensagensController::class, 'update'])->middleware('auth');
 Route::put('/updateMensagem/{id}', [MensagensController::class, 'updateCliente'])->middleware('auth');
 Route::delete('/mensagens/{id}', [MensagensController::class, 'destroy'])->middleware('auth');
+
+Route::get('/formularios-avaliacao', [FormularioAvaliacaoController::class, 'index'])->middleware('auth');
+Route::get('/formularios-avaliacao/create', [FormularioAvaliacaoController::class, 'create'])->middleware('auth');
+Route::post('/formularios-avaliacao', [FormularioAvaliacaoController::class, 'store'])->middleware('auth');
+Route::get('/formularios-avaliacao/{id}', [FormularioAvaliacaoController::class, 'show'])->middleware('auth');
+Route::get('/formularios-avaliacao/edit/{id}', [FormularioAvaliacaoController::class, 'edit'])->middleware('auth');
+Route::put('/formularios-avaliacao/{id}', [FormularioAvaliacaoController::class, 'update'])->middleware('auth');
+Route::put('/updateFormularioAvaliacao/{id}', [FormularioAvaliacaoController::class, 'updateFormularioAvaliacao'])->middleware('auth');
+Route::delete('/formularios-avaliacao/{id}', [FormularioAvaliacaoController::class, 'destroy'])->middleware('auth');
+
+Route::get('/campos', [CampoController::class, 'index'])->middleware('auth');
+Route::get('/campos/create', [CampoController::class, 'create'])->middleware('auth');
+Route::post('/campos', [CampoController::class, 'store'])->middleware('auth');
+Route::get('/campos/{id}', [CampoController::class, 'show'])->middleware('auth');
+Route::get('/campos/edit/{id}', [CampoController::class, 'edit'])->middleware('auth');
+Route::put('/campos/{id}', [CampoController::class, 'update'])->middleware('auth');
+Route::put('/updateCampo/{id}', [CampoController::class, 'updateCampo'])->middleware('auth');
+Route::delete('/campos/{id}', [CampoController::class, 'destroy'])->middleware('auth');
+
+
+Route::get('/avaliacoes-cliente', [AvaliacaoClienteController::class, 'index'])->middleware('auth');
+Route::get('/avaliacoes-cliente/create', [AvaliacaoClienteController::class, 'create'])->middleware('auth');
+Route::post('/avaliacoes-cliente', [AvaliacaoClienteController::class, 'store'])->middleware('auth');
+Route::get('/avaliacoes-cliente/{id}', [AvaliacaoClienteController::class, 'show'])->middleware('auth');
+Route::get('/avaliacoes-cliente/edit/{id}', [AvaliacaoClienteController::class, 'edit'])->middleware('auth');
+Route::put('/avaliacoes-cliente/{id}', [AvaliacaoClienteController::class, 'update'])->middleware('auth');
+Route::put('/updateAvaliacaoCliente/{id}', [AvaliacaoClienteController::class, 'updateAvaliacaoCliente'])->middleware('auth');
+Route::delete('/avaliacoes-cliente/{id}', [AvaliacaoClienteController::class, 'destroy'])->middleware('auth');
+
+
+Route::get('/respostas', [RespostaController::class, 'index'])->middleware('auth');
+Route::get('/respostas/create', [RespostaController::class, 'create'])->middleware('auth');
+Route::post('/respostas', [RespostaController::class, 'store'])->middleware('auth');
+Route::get('/respostas/{id}', [RespostaController::class, 'show'])->middleware('auth');
+Route::get('/respostas/edit/{id}', [RespostaController::class, 'edit'])->middleware('auth');
+Route::put('/respostas/{id}', [RespostaController::class, 'update'])->middleware('auth');
+Route::delete('/respostas/{id}', [RespostaController::class, 'destroy'])->middleware('auth');
+
+Route::get('/historicos', [HistoricoController::class, 'index'])->middleware('auth');
+Route::get('/historicos/create', [HistoricoController::class, 'create'])->middleware('auth');
+Route::post('/historicos', [HistoricoController::class, 'store'])->middleware('auth');
+Route::get('/historicos/{id}', [HistoricoController::class, 'show'])->middleware('auth');
+Route::get('/historicos/edit/{id}', [HistoricoController::class, 'edit'])->middleware('auth');
+Route::put('/historicos/{id}', [HistoricoController::class, 'update'])->middleware('auth');
+Route::delete('/historicos/{id}', [HistoricoController::class, 'destroy'])->middleware('auth');

@@ -335,6 +335,36 @@ return [
             'icon'        => 'far fa-fw fa-file',
             'label_color' => 'success',
         ],
+        [
+            'text'        => 'Gerenciar Formulários',
+            'url'         => 'formularios-avaliacao',
+            'icon'        => 'far fa-fw fa-file',
+            'label_color' => 'success',
+        ],
+        [
+            'text'        => 'Gerenciar Campos',
+            'url'         => 'campos',
+            'icon'        => 'far fa-fw fa-file',
+            'label_color' => 'success',
+        ],
+        [
+            'text'        => 'Gerenciar Avaliações',
+            'url'         => 'avaliacoes-cliente',
+            'icon'        => 'far fa-fw fa-file',
+            'label_color' => 'success',
+        ],
+        [
+            'text'        => 'Gerenciar Respostas',
+            'url'         => 'respostas',
+            'icon'        => 'far fa-fw fa-file',
+            'label_color' => 'success',
+        ],
+        [
+            'text'        => 'Gerenciar Históricos',
+            'url'         => 'historicos',
+            'icon'        => 'far fa-fw fa-file',
+            'label_color' => 'success',
+        ],
         ['header' => 'ADM'],
         [
             'text'        => 'Gerenciar Usuários',
