@@ -11,6 +11,8 @@
     <form action="/users" method="POST" enctype="multipart/form-data">
         @csrf
 
+        <a href="{{ route('users.users') }}" class="btn btn-warning">Voltar</a>
+
         <div class="form-group">
             <label for="name" class="control-label">Nome</label>
             <div class="input-group">

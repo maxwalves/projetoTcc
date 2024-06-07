@@ -50,18 +50,18 @@ Route::middleware([
 
 
 // ROTAS PARA ADM USERS
-Route::get('/users/users', [UsersController::class, 'users'])->middleware('auth');
-Route::get('/users/create', [UsersController::class, 'create'])->middleware('auth');
-Route::get('/users/{id}', [UsersController::class, 'show'])->middleware('auth');
-Route::delete('/users/{id}', [UsersController::class, 'destroy'])->middleware('auth');
-Route::get('/users/edit/{id}', [UsersController::class, 'edit'])->middleware('auth');
+Route::get('/users/users', [UsersController::class, 'users'])->middleware('auth')->name('users.users');
+Route::get('/users/create', [UsersController::class, 'create'])->middleware('auth')->name('users.create');
+Route::get('/users/{id}', [UsersController::class, 'show'])->middleware('auth')->name('users.show');
+Route::delete('/users/{id}', [UsersController::class, 'destroy'])->middleware('auth')->name('users.destroy');
+Route::get('/users/edit/{id}', [UsersController::class, 'edit'])->middleware('auth')->name('users.edit');
 
-Route::get('/users/editPerfil/{id}', [UsersController::class, 'editPerfil'])->middleware('auth');
-Route::get('/users/editPerfil/{id}/{ordem}', [UsersController::class, 'updatePerfil'])->middleware('auth');
+Route::get('/users/editPerfil/{id}', [UsersController::class, 'editPerfil'])->middleware('auth')->name('users.editPerfil');
+Route::get('/users/editPerfil/{id}/{ordem}', [UsersController::class, 'updatePerfil'])->middleware('auth')->name('users.updatePerfil');
 
-Route::put('/users/update/{id}', [UsersController::class, 'update'])->middleware('auth');
-Route::post('/users', [UsersController::class, 'store'])->middleware('auth');
-Route::get('/sistema', [SistemaController::class, 'sistema'])->middleware('auth');
+Route::put('/users/update/{id}', [UsersController::class, 'update'])->middleware('auth')->name('users.update');
+Route::post('/users', [UsersController::class, 'store'])->middleware('auth')->name('users.store');
+Route::get('/sistema', [SistemaController::class, 'sistema'])->middleware('auth')->name('sistema');
 
 
 Route::get('/faqs', [FaqController::class, 'index'])->middleware('auth');
@@ -84,13 +84,18 @@ Route::delete('/clientes/{id}', [ClientesController::class, 'destroy'])->middlew
 
 
 
-Route::get('/setores', [SetorController::class, 'index'])->middleware('auth');
-Route::get('/setores/create', [SetorController::class, 'create'])->middleware('auth');
-Route::post('/setores', [SetorController::class, 'store'])->middleware('auth');
-Route::get('/setores/{id}', [SetorController::class, 'show'])->middleware('auth');
-Route::get('/setores/edit/{id}', [SetorController::class, 'edit'])->middleware('auth');
-Route::put('/setores/{id}', [SetorController::class, 'update'])->middleware('auth');
-Route::delete('/setores/{id}', [SetorController::class, 'destroy'])->middleware('auth');
+Route::get('/setores', [SetorController::class, 'index'])->middleware('auth')->name('setores.index');
+Route::get('/setores/create', [SetorController::class, 'create'])->middleware('auth')->name('setores.create');
+Route::post('/setores', [SetorController::class, 'store'])->middleware('auth')->name('setores.store');
+Route::get('/setores/{id}', [SetorController::class, 'show'])->middleware('auth')->name('setores.show');
+Route::get('/setores/edit/{id}', [SetorController::class, 'edit'])->middleware('auth')->name('setores.edit');
+Route::put('/setores/{id}', [SetorController::class, 'update'])->middleware('auth')->name('setores.update');
+Route::delete('/setores/{id}', [SetorController::class, 'destroy'])->middleware('auth')->name('setores.destroy');
+Route::get('/clientesSetor/{id}', [SetorController::class, 'clientesSetor'])->middleware('auth')->name('clientesSetor');
+Route::get('/clientesSetor/create/{idSetor}', [SetorController::class, 'createClienteSetor'])->middleware('auth')->name('clientesSetor.create');
+Route::get('/clientesSetor/edit/{idCliente}', [SetorController::class, 'editClienteSetor'])->middleware('auth')->name('clientesSetor.edit');
+Route::post('/clientesSetor', [SetorController::class, 'storeClienteSetor'])->middleware('auth')->name('clientesSetor.store');
+Route::put('/clientesSetor/{id}', [SetorController::class, 'updateClienteSetor'])->middleware('auth')->name('clientesSetor.update');
 
 
 Route::get('/mensagens', [MensagensController::class, 'index'])->middleware('auth');

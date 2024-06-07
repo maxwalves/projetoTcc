@@ -13,6 +13,8 @@
         @csrf
         @method('PUT')
 
+        <a href="{{ route('users.users') }}" class="btn btn-warning">Voltar</a>
+
         <div class="form-group">
             <label for="id" class="control-label">Id</label>
             <div class="input-group">
