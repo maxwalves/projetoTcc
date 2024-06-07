@@ -35,14 +35,19 @@
                             <td>{{ $cliente->usuario->name }}</td>
                             <td>{{ $cliente->setor->nomeSetor }}</td>
                             <td>
-                                <a href="{{ url('/clientes/edit/' . $cliente->id) }}"
-                                    class="btn btn-success btn-sm">Editar</a>
-                                <form action="{{ url('/clientes/' . $cliente->id) }}" method="POST">
-                                    @method('DELETE')
-                                    @csrf
-                                    <button type="submit" class="btn btn-danger btn-sm">Remover</button>
-                                </form>
+                                <div class="btn-group">
+                                    <a href="{{ url('/clientes/edit/' . $cliente->id) }}"
+                                        class="btn btn-success btn-sm"><i class="fas fa-edit"></i></a>
+                                    <a href="{{ url('/clientes/avaliacoes/' . $cliente->id) }}" class="btn btn-primary btn-sm"><i class="fas fa-list"></i></a>
+                                    <a href="{{ url('/clientes/historico/' . $cliente->id) }}" class="btn btn-info btn-sm"><i class="fas fa-history"></i></a>
+                                    <form action="{{ url('/clientes/' . $cliente->id) }}" method="POST">
+                                        @method('DELETE')
+                                        @csrf
+                                        <button type="submit" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></button>
+                                    </form>
+                                </div>
                             </td>
+                        </tr>
                         </tr>
                     @endforeach
                 </tbody>

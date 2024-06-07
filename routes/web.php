@@ -73,16 +73,19 @@ Route::put('/faqs/{id}', [FaqController::class, 'update'])->middleware('auth');
 Route::put('/updateFaq/{id}', [FaqController::class, 'updateFaq'])->middleware('auth');
 Route::delete('/faqs/{id}', [FaqController::class, 'destroy'])->middleware('auth');
 
-Route::get('/clientes', [ClientesController::class, 'index'])->middleware('auth');
-Route::get('/clientes/create', [ClientesController::class, 'create'])->middleware('auth');
-Route::post('/clientes', [ClientesController::class, 'store'])->middleware('auth');
-Route::get('/clientes/{id}', [ClientesController::class, 'show'])->middleware('auth');
-Route::get('/clientes/edit/{id}', [ClientesController::class, 'edit'])->middleware('auth');
-Route::put('/clientes/{id}', [ClientesController::class, 'update'])->middleware('auth');
-Route::put('/updateCliente/{id}', [ClientesController::class, 'updateCliente'])->middleware('auth');
-Route::delete('/clientes/{id}', [ClientesController::class, 'destroy'])->middleware('auth');
-
-
+Route::get('/clientes', [ClientesController::class, 'index'])->middleware('auth')->name('clientes.index');
+Route::get('/clientes/create', [ClientesController::class, 'create'])->middleware('auth')->name('clientes.create');
+Route::post('/clientes', [ClientesController::class, 'store'])->middleware('auth')->name('clientes.store');
+Route::get('/clientes/{id}', [ClientesController::class, 'show'])->middleware('auth')->name('clientes.show');
+Route::get('/clientes/edit/{id}', [ClientesController::class, 'edit'])->middleware('auth')->name('clientes.edit');
+Route::put('/clientes/{id}', [ClientesController::class, 'update'])->middleware('auth')->name('clientes.update');
+Route::put('/updateCliente/{id}', [ClientesController::class, 'updateCliente'])->middleware('auth')->name('clientes.updateCliente');
+Route::delete('/clientes/{id}', [ClientesController::class, 'destroy'])->middleware('auth')->name('clientes.destroy');
+Route::get('/clientes/avaliacoes/{id}', [ClientesController::class, 'avaliacoesCliente'])->middleware('auth')->name('clientes.avaliacoes');
+Route::post('/clientes/avaliacoes/store/{id}', [AvaliacaoClienteController::class, 'storeAvaliacao'])->middleware('auth')->name('clientes.avaliacoes.store');
+Route::delete('/clientes/avaliacoes/{id}', [AvaliacaoClienteController::class, 'destroyAvaliacao'])->middleware('auth')->name('clientes.avaliacoes.destroy');
+Route::get('/clientes/historico/{id}', [ClientesController::class, 'historicoCliente'])->middleware('auth')->name('clientes.historico');
+Route::get('/clientes/createAvaliacaoCliente/{clienteId}', [ClientesController::class, 'createAvaliacaoCliente'])->middleware('auth')->name('clientes.createAvaliacaoCliente');
 
 Route::get('/setores', [SetorController::class, 'index'])->middleware('auth')->name('setores.index');
 Route::get('/setores/create', [SetorController::class, 'create'])->middleware('auth')->name('setores.create');
@@ -135,6 +138,7 @@ Route::get('/avaliacoes-cliente/edit/{id}', [AvaliacaoClienteController::class, 
 Route::put('/avaliacoes-cliente/{id}', [AvaliacaoClienteController::class, 'update'])->middleware('auth');
 Route::put('/updateAvaliacaoCliente/{id}', [AvaliacaoClienteController::class, 'updateAvaliacaoCliente'])->middleware('auth');
 Route::delete('/avaliacoes-cliente/{id}', [AvaliacaoClienteController::class, 'destroy'])->middleware('auth');
+Route::get('/avaliacoes-cliente/{clienteId}/{avaliacaoId}', [AvaliacaoClienteController::class, 'show'])->middleware('auth')->name('avaliacoes-cliente.show');
 
 
 Route::get('/respostas', [RespostaController::class, 'index'])->middleware('auth');

@@ -11,6 +11,9 @@
     <form action="{{ url("/clientes/".$cliente->id) }}" method="POST">
         @method('PUT')
         @csrf
+
+        <a href="{{ route('clientes.index') }}" class="btn btn-warning"><i class="fas fa-arrow-left"></i></a>
+        
         <div class="form-group">
             <label for="nome">Nome:</label>
             <input type="text" class="form-control" name="nome" id="nome" value="{{ $cliente->nome }}" required>

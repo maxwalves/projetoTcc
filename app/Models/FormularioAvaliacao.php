@@ -12,4 +12,10 @@ class FormularioAvaliacao extends Model
     protected $table = 'formulario_avaliacoes';
 
     protected $fillable = ['descricao'];
+
+    // Relação com Campo
+    public function campos()
+    {
+        return $this->hasMany(Campo::class);
+    }
 }

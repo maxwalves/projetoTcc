@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cliente;
+use App\Models\FormularioAvaliacao;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Setor;
@@ -90,4 +91,29 @@ class ClientesController extends Controller
         $cliente->delete();
         return redirect('/clientes')->with('success', 'Cliente removido com sucesso.');
     }
+
+    public function avaliacoesCliente($id)
+    {
+        $cliente = Cliente::findOrFail($id);
+        $avaliacoes = $cliente->avaliacoes;
+
+        return view('clientes.avaliacoes', compact('cliente', 'avaliacoes'));
+    }
+
+    public function historicoCliente($id)
+    {
+        $cliente = Cliente::findOrFail($id);
+        $historicos = $cliente->historicos;
+
+        return view('clientes.historico', compact('cliente', 'historicos'));
+    }
+
+    //faça uma function para createAvaliacaoCliente
+    public function createAvaliacaoCliente($clienteId)
+    {
+        $cliente = Cliente::findOrFail($clienteId);
+        $formularios = FormularioAvaliacao::all();
+        return view('clientes.createAvaliacaoCliente', compact('cliente', 'formularios'));
+    }
+
 }
