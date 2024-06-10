@@ -100,14 +100,6 @@ class ClientesController extends Controller
         return view('clientes.avaliacoes', compact('cliente', 'avaliacoes'));
     }
 
-    public function historicoCliente($id)
-    {
-        $cliente = Cliente::findOrFail($id);
-        $historicos = $cliente->historicos;
-
-        return view('clientes.historico', compact('cliente', 'historicos'));
-    }
-
     //faça uma function para createAvaliacaoCliente
     public function createAvaliacaoCliente($clienteId)
     {

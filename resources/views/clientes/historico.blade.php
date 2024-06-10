@@ -40,8 +40,8 @@
                 </td>
                 <td>{{ $historico->descricao }}</td>
                 <td>
-                    <a href="{{ url("/historicos/edit/".$historico->id) }}" class="btn btn-success btn-sm">Editar</a>
-                    <form action="{{ url("/historicos/".$historico->id) }}" method="POST" style="display:inline-block;">
+                    <a href="{{ url("/clientes/editHistorico/".$historico->id) }}" class="btn btn-success btn-sm">Editar</a>
+                    <form action="{{ url("/clientes/historico/".$historico->id) }}" method="POST" style="display:inline-block;">
                         @method('DELETE')
                         @csrf
                         <button type="submit" class="btn btn-danger btn-sm">Remover</button>
@@ -52,11 +52,11 @@
         </tbody>
     </table>
     @else
-    <p>Você ainda não tem históricos, <a href="{{ url("/historicos/create") }}">Criar novo histórico</a></p>
+    <p>Você ainda não tem históricos, <a href="{{ url("/clientes/createHistorico/" . $cliente->id) }}">Criar novo histórico</a></p>
     @endif
     <div class="row">
         <div class="col-12 col-xl-4">
-            <a class="btn btn-success btn-lg" href="{{ url("/historicos/create") }}">Criar novo histórico</a>
+            <a class="btn btn-success btn-lg" href="{{ url("/clientes/createHistorico/" . $cliente->id) }}">Criar novo histórico</a>
         </div>
     </div>
 </div>

@@ -81,11 +81,18 @@ Route::get('/clientes/edit/{id}', [ClientesController::class, 'edit'])->middlewa
 Route::put('/clientes/{id}', [ClientesController::class, 'update'])->middleware('auth')->name('clientes.update');
 Route::put('/updateCliente/{id}', [ClientesController::class, 'updateCliente'])->middleware('auth')->name('clientes.updateCliente');
 Route::delete('/clientes/{id}', [ClientesController::class, 'destroy'])->middleware('auth')->name('clientes.destroy');
+
 Route::get('/clientes/avaliacoes/{id}', [ClientesController::class, 'avaliacoesCliente'])->middleware('auth')->name('clientes.avaliacoes');
 Route::post('/clientes/avaliacoes/store/{id}', [AvaliacaoClienteController::class, 'storeAvaliacao'])->middleware('auth')->name('clientes.avaliacoes.store');
 Route::delete('/clientes/avaliacoes/{id}', [AvaliacaoClienteController::class, 'destroyAvaliacao'])->middleware('auth')->name('clientes.avaliacoes.destroy');
-Route::get('/clientes/historico/{id}', [ClientesController::class, 'historicoCliente'])->middleware('auth')->name('clientes.historico');
 Route::get('/clientes/createAvaliacaoCliente/{clienteId}', [ClientesController::class, 'createAvaliacaoCliente'])->middleware('auth')->name('clientes.createAvaliacaoCliente');
+
+Route::get('/clientes/historico/{id}', [HistoricoController::class, 'historicoCliente'])->middleware('auth')->name('clientes.historico');
+Route::post('/clientes/historico/store/{id}', [HistoricoController::class, 'storeHistorico'])->middleware('auth')->name('clientes.historico.store');
+Route::delete('/clientes/historico/{id}', [HistoricoController::class, 'destroyHistorico'])->middleware('auth')->name('clientes.historico.destroy');
+Route::get('/clientes/editHistorico/{id}', [HistoricoController::class, 'editHistorico'])->middleware('auth')->name('clientes.editHistorico');
+Route::put('/clientes/updateHistorico/{id}', [HistoricoController::class, 'updateHistorico'])->middleware('auth')->name('clientes.updateHistorico');
+Route::get('/clientes/createHistorico/{clienteId}', [HistoricoController::class, 'createHistoricoCliente'])->middleware('auth')->name('clientes.createHistoricoCliente');
 
 Route::get('/setores', [SetorController::class, 'index'])->middleware('auth')->name('setores.index');
 Route::get('/setores/create', [SetorController::class, 'create'])->middleware('auth')->name('setores.create');
