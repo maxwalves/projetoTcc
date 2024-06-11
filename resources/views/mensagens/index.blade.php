@@ -16,7 +16,7 @@
             <tr>
                 <th>Nome</th>
                 <th>E-mail</th>
-                <th>Projeto</th>
+                <th>Assunto</th>
                 <th>Conteúdo</th>
                 <th>Setor</th>
                 <th>Data de criação</th>
@@ -28,7 +28,7 @@
             <tr>
                 <td>{{ $mensagem->nome }}</td>
                 <td>{{ $mensagem->email }}</td>
-                <td>{{ $mensagem->projeto }}</td>
+                <td>{{ $mensagem->assunto }}</td>
                 <td>{{ $mensagem->conteudo }}</td>
                 <td>{{ $mensagem->setor ? $mensagem->setor->nomeSetor : 'Sem setor' }}</td>
                 <td>{{ date('d/m/Y', strtotime($mensagem->created_at)) }}</td>

@@ -17,7 +17,7 @@
             <ul class="list-group list-group-flush">
                 <li class="list-group-item"><strong>Nome:</strong> {{ $mensagem->nome }}</li>
                 <li class="list-group-item"><strong>E-mail:</strong> {{ $mensagem->email }}</li>
-                <li class="list-group-item"><strong>Projeto:</strong> {{ $mensagem->projeto }}</li>
+                <li class="list-group-item"><strong>Assunto:</strong> {{ $mensagem->assunto }}</li>
                 <li class="list-group-item"><strong>Conteúdo:</strong> {{ $mensagem->conteudo }}</li>
                 <li class="list-group-item"><strong>Data de Criação:</strong> {{ date('d/m/Y', strtotime($mensagem->dataCriacao)) }}</li>
             </ul>

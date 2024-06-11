@@ -32,7 +32,7 @@ class MensagensController extends Controller
         $mensagem = new Mensagem();
         $mensagem->nome = $request->nome;
         $mensagem->email = $request->email;
-        $mensagem->projeto = $request->projeto;
+        $mensagem->assunto = $request->assunto;
         $mensagem->conteudo = $request->conteudo;
         
         $dataCriacao = new \DateTime('now', new \DateTimeZone('America/Sao_Paulo'));
@@ -47,7 +47,7 @@ class MensagensController extends Controller
         $mensagem = new Mensagem();
         $mensagem->nome = $request->nome;
         $mensagem->email = $request->email;
-        $mensagem->projeto = $request->projeto;
+        $mensagem->assunto = $request->assunto;
         $mensagem->conteudo = $request->conteudo;
         $mensagem->setor_id = $request->setor;
         

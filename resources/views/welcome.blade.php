@@ -49,11 +49,11 @@
             function enviarMensagem() {
                 var nome = document.getElementById('nome').value;
                 var email = document.getElementById('email').value;
-                var projeto = document.getElementById('projeto').value;
+                var assunto = document.getElementById('assunto').value;
                 var conteudo = document.getElementById('conteudo').value;
                 var setor = document.getElementById('setor').value;
 
-                if (nome == '' || email == '' || projeto == '' || conteudo == '') {
+                if (nome == '' || email == '' || assunto == '' || conteudo == '') {
                     alert('Preencha todos os campos!');
                     return false;
                 }
@@ -72,7 +72,7 @@
                 formData.append('_token', token); // Adicionando o token CSRF
                 formData.append('nome', nome);
                 formData.append('email', email);
-                formData.append('projeto', projeto);
+                formData.append('assunto', assunto);
                 formData.append('conteudo', conteudo);
                 formData.append('setor', setor);
 
@@ -86,7 +86,7 @@
                         //limpe os campos
                         document.getElementById('nome').value = '';
                         document.getElementById('email').value = '';
-                        document.getElementById('projeto').value = '';
+                        document.getElementById('assunto').value = '';
                         document.getElementById('conteudo').value = '';
 
                     } else {
@@ -165,8 +165,8 @@
                                                 name="email" id="email" required>
                                             </div>
                                             <div class="mb-4">
-                                                <input type="text" class="form-control border-0 py-3" placeholder="Projeto"
-                                                name="projeto" id="projeto" required>
+                                                <input type="text" class="form-control border-0 py-3" placeholder="Assunto"
+                                                name="assunto" id="assunto" required>
                                             </div>
                                             <div class="mb-4">
                                                 <textarea class="w-100 form-control border-0 py-3" rows="6" cols="10" placeholder="Mensagem"
@@ -191,9 +191,21 @@
                             </div>
                         </div> 
                     </div>
-
-                    
                 </div>
+
+                <!-- Seção de FAQ -->
+                <div class="mt-16">
+                    <h2 class="text-2xl font-semibold text-gray-900 text-center">Perguntas Frequentes (FAQ)</h2>
+                    <div class="mt-6">
+                        @foreach ($faqs as $faq)
+                            <div class="p-6 bg-white rounded-lg shadow-md my-4">
+                                <h3 class="text-xl font-semibold text-gray-900">{{ $faq->pergunta }}</h3>
+                                <p class="mt-2 text-gray-600">{{ $faq->resposta }}</p>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+                
             </div>
             
             

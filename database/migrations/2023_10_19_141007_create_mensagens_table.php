@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('nome');
             $table->string('email');
-            $table->string('projeto');
+            $table->string('assunto');
             $table->text('conteudo');
             $table->timestamp('dataCriacao')->useCurrent();
             $table->timestamps();

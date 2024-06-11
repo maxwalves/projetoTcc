@@ -22,8 +22,8 @@
             <input type="text" class="form-control" name="email" id="email" required>
         </div>
         <div class="form-group">
-            <label for="projeto">Projeto:</label>
-            <input type="text" class="form-control" name="projeto" id="projeto" required>
+            <label for="assunto">Assunto:</label>
+            <input type="text" class="form-control" name="assunto" id="assunto" required>
         </div>
         <div class="form-group">
             <label for="conteudo">Conteúdo:</label>

@@ -29,16 +29,6 @@ use App\Models\AvaliacaoCliente;
 */
 
 Route::get('/', [FaqController::class, 'welcome']);
-Route::get('/sobre', [FaqController::class, 'sobre']);
-Route::get('/servicos', [FaqController::class, 'servicos']);
-Route::get('/projetos', [FaqController::class, 'projetos']);
-Route::get('/contato', [FaqController::class, 'contato']);
-Route::get('/criacaoSites', [FaqController::class, 'criacaoSites']);
-Route::get('/criacaoSoftware', [FaqController::class, 'criacaoSoftware']);
-Route::get('/criacaoLogo', [FaqController::class, 'criacaoLogo']);
-
-
-
 
 Route::middleware([
     'auth:sanctum',

@@ -11,7 +11,7 @@ class Mensagem extends Model
 
     protected $table = 'mensagens'; // O nome da tabela no banco de dados
 
-    protected $fillable = ['nome', 'email', 'projeto', 'conteudo', 'dataCriacao', 'setor_id']; // Campos que podem ser preenchidos em massa
+    protected $fillable = ['nome', 'email', 'assunto', 'conteudo', 'dataCriacao', 'setor_id']; // Campos que podem ser preenchidos em massa
 
     // Outros métodos, relações, etc., conforme necessário
 
