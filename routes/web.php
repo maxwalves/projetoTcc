@@ -13,6 +13,9 @@ use App\Http\Controllers\CampoController;
 use App\Http\Controllers\AvaliacaoClienteController;
 use App\Http\Controllers\RespostaController;
 use App\Http\Controllers\HistoricoController;
+use App\Models\Cliente;
+use App\Models\Mensagem;
+use App\Models\AvaliacaoCliente;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,7 +47,10 @@ Route::middleware([
 ])->group(function () {
     Route::get('/dashboard', function () {
         $user = auth()->user();
-        return view('dashboard', ['user' => $user]);
+        $quantidadeClientes = Cliente::count();
+        $quantidadeMensagens = Mensagem::count();
+        $quantidadeAvaliacoes = AvaliacaoCliente::count();
+        return view('dashboard', ['user' => $user, 'quantidadeClientes' => $quantidadeClientes, 'quantidadeMensagens' => $quantidadeMensagens, 'quantidadeAvaliacoes' => $quantidadeAvaliacoes]);
     })->name('dashboard');
 });
 
@@ -112,15 +118,15 @@ Route::post('/clientesSetor', [SetorController::class, 'storeClienteSetor'])->mi
 Route::put('/clientesSetor/{id}', [SetorController::class, 'updateClienteSetor'])->middleware('auth')->name('clientesSetor.update');
 
 
-Route::get('/mensagens', [MensagensController::class, 'index'])->middleware('auth');
-Route::get('/mensagens/create', [MensagensController::class, 'create'])->middleware('auth');
-Route::post('/mensagens', [MensagensController::class, 'store'])->middleware('auth');
-Route::post('/mensagensInicial', [MensagensController::class, 'storeInicial']);
-Route::get('/mensagens/{id}', [MensagensController::class, 'show'])->middleware('auth');
-Route::get('/mensagens/edit/{id}', [MensagensController::class, 'edit'])->middleware('auth');
-Route::put('/mensagens/{id}', [MensagensController::class, 'update'])->middleware('auth');
-Route::put('/updateMensagem/{id}', [MensagensController::class, 'updateCliente'])->middleware('auth');
-Route::delete('/mensagens/{id}', [MensagensController::class, 'destroy'])->middleware('auth');
+Route::get('/mensagens', [MensagensController::class, 'index'])->middleware('auth')->name('mensagens.index');
+Route::get('/mensagens/create', [MensagensController::class, 'create'])->middleware('auth')->name('mensagens.create');
+Route::post('/mensagens', [MensagensController::class, 'store'])->middleware('auth')->name('mensagens.store');
+Route::post('/mensagensInicial', [MensagensController::class, 'storeInicial'])->name('mensagens.storeInicial');
+Route::get('/mensagens/{id}', [MensagensController::class, 'show'])->middleware('auth')->name('mensagens.show');
+Route::get('/mensagens/edit/{id}', [MensagensController::class, 'edit'])->middleware('auth')->name('mensagens.edit');
+Route::put('/mensagens/{id}', [MensagensController::class, 'update'])->middleware('auth')->name('mensagens.update');
+Route::put('/updateMensagem/{id}', [MensagensController::class, 'updateCliente'])->middleware('auth')->name('mensagens.updateCliente');
+Route::delete('/mensagens/{id}', [MensagensController::class, 'destroy'])->middleware('auth')->name('mensagens.destroy');
 
 Route::get('/formularios-avaliacao', [FormularioAvaliacaoController::class, 'index'])->middleware('auth');
 Route::get('/formularios-avaliacao/create', [FormularioAvaliacaoController::class, 'create'])->middleware('auth');
@@ -141,14 +147,14 @@ Route::put('/updateCampo/{id}', [CampoController::class, 'updateCampo'])->middle
 Route::delete('/campos/{id}', [CampoController::class, 'destroy'])->middleware('auth');
 
 
-Route::get('/avaliacoes-cliente', [AvaliacaoClienteController::class, 'index'])->middleware('auth');
-Route::get('/avaliacoes-cliente/create', [AvaliacaoClienteController::class, 'create'])->middleware('auth');
-Route::post('/avaliacoes-cliente', [AvaliacaoClienteController::class, 'store'])->middleware('auth');
-Route::get('/avaliacoes-cliente/{id}', [AvaliacaoClienteController::class, 'show'])->middleware('auth');
-Route::get('/avaliacoes-cliente/edit/{id}', [AvaliacaoClienteController::class, 'edit'])->middleware('auth');
-Route::put('/avaliacoes-cliente/{id}', [AvaliacaoClienteController::class, 'update'])->middleware('auth');
-Route::put('/updateAvaliacaoCliente/{id}', [AvaliacaoClienteController::class, 'updateAvaliacaoCliente'])->middleware('auth');
-Route::delete('/avaliacoes-cliente/{id}', [AvaliacaoClienteController::class, 'destroy'])->middleware('auth');
+Route::get('/avaliacoes-cliente', [AvaliacaoClienteController::class, 'index'])->middleware('auth')->name('avaliacoes-cliente.index');
+Route::get('/avaliacoes-cliente/create', [AvaliacaoClienteController::class, 'create'])->middleware('auth')->name('avaliacoes-cliente.create');
+Route::post('/avaliacoes-cliente', [AvaliacaoClienteController::class, 'store'])->middleware('auth')->name('avaliacoes-cliente.store');
+Route::get('/avaliacoes-cliente/{id}', [AvaliacaoClienteController::class, 'show'])->middleware('auth')->name('avaliacoes-cliente.show');
+Route::get('/avaliacoes-cliente/edit/{id}', [AvaliacaoClienteController::class, 'edit'])->middleware('auth')->name('avaliacoes-cliente.edit');
+Route::put('/avaliacoes-cliente/{id}', [AvaliacaoClienteController::class, 'update'])->middleware('auth')->name('avaliacoes-cliente.update');
+Route::put('/updateAvaliacaoCliente/{id}', [AvaliacaoClienteController::class, 'updateAvaliacaoCliente'])->middleware('auth')->name('avaliacoes-cliente.updateAvaliacaoCliente');
+Route::delete('/avaliacoes-cliente/{id}', [AvaliacaoClienteController::class, 'destroy'])->middleware('auth')->name('avaliacoes-cliente.destroy');
 Route::get('/avaliacoes-cliente/{clienteId}/{avaliacaoId}', [AvaliacaoClienteController::class, 'show'])->middleware('auth')->name('avaliacoes-cliente.show');
 
 
