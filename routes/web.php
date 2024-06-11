@@ -93,6 +93,10 @@ Route::delete('/clientes/historico/{id}', [HistoricoController::class, 'destroyH
 Route::get('/clientes/editHistorico/{id}', [HistoricoController::class, 'editHistorico'])->middleware('auth')->name('clientes.editHistorico');
 Route::put('/clientes/updateHistorico/{id}', [HistoricoController::class, 'updateHistorico'])->middleware('auth')->name('clientes.updateHistorico');
 Route::get('/clientes/createHistorico/{clienteId}', [HistoricoController::class, 'createHistoricoCliente'])->middleware('auth')->name('clientes.createHistoricoCliente');
+Route::get('/clientes/enviarAvaliacao/{clienteId}/{avaliacaoId}', [ClientesController::class, 'paginaEnvioAvaliacao'])->middleware('auth')->name('clientes.enviarAvaliacao');
+
+Route::get('clientes/formulario/{hash}', [ClientesController::class, 'formularioAvaliacao'])->name('clientes.formularioAvaliacao');
+Route::post('clientes/enviarAvaliacao/{hash}', [ClientesController::class, 'enviarAvaliacao'])->name('clientes.enviarAvaliacao');
 
 Route::get('/setores', [SetorController::class, 'index'])->middleware('auth')->name('setores.index');
 Route::get('/setores/create', [SetorController::class, 'create'])->middleware('auth')->name('setores.create');

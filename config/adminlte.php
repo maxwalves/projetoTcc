@@ -68,7 +68,7 @@ return [
     'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => null,
     'logo_img_xl_class' => 'brand-image-xs',
-    'logo_img_alt' => 'Jurisoft',
+    'logo_img_alt' => 'SatisTracker',
 
     /*
     |--------------------------------------------------------------------------
@@ -110,7 +110,7 @@ return [
         'enabled' => true,
         'img' => [
             'path' => 'img/logo.png',
-            'alt' => 'Jurisoft',
+            'alt' => 'SatisTracker',
             'effect' => 'animation__shake',
             'width' => 60,
             'height' => 60,
@@ -317,6 +317,7 @@ return [
             'icon'        => 'fas fa-th-list',
             'label_color' => 'success',
             'icon_color' => 'cyan',
+            'classes' => 'autenticado',
         ],
         [
             'text'        => 'Gerenciar Clientes',
@@ -324,6 +325,7 @@ return [
             'icon'        => 'fas fa-users',
             'label_color' => 'success',
             'icon_color' => 'cyan',
+            'classes' => 'autenticado',
         ],
         [
             'text'        => 'Mensagens recebidas',
@@ -331,6 +333,7 @@ return [
             'icon'        => 'fas fa-inbox',
             'label_color' => 'success',
             'icon_color' => 'cyan',
+            'classes' => 'autenticado',
         ],
         [
             'text'        => 'Gerenciar FAQ',
@@ -338,6 +341,7 @@ return [
             'icon'        => 'fas fa-question-circle',
             'label_color' => 'success',
             'icon_color' => 'cyan',
+            'classes' => 'autenticado',
         ],
         ['header' => 'Gerenciar Formulários'],
         [
@@ -346,6 +350,7 @@ return [
             'icon'        => 'far fa-file-alt',
             'label_color' => 'success',
             'icon_color' => 'green',
+            'classes' => 'autenticado',
         ],
         [
             'text'        => 'Gerenciar Campos',
@@ -353,6 +358,7 @@ return [
             'icon'        => 'far fa-file-alt',
             'label_color' => 'success',
             'icon_color' => 'green',
+            'classes' => 'autenticado',
         ],
         ['header' => 'Administrador'],
         [
@@ -361,6 +367,8 @@ return [
             'icon'        => 'far fa-fw fa-file',
             'label_color' => 'success',
             'icon_color' => 'red',
+            'can'  => 'view users',
+            'classes' => 'autenticado',
         ],
         [
             'text'        => 'Gerenciar Respostas',
@@ -368,6 +376,8 @@ return [
             'icon'        => 'far fa-fw fa-file',
             'label_color' => 'success',
             'icon_color' => 'red',
+            'can'  => 'view users',
+            'classes' => 'autenticado',
         ],
         [
             'text'        => 'Gerenciar Históricos',
@@ -375,12 +385,15 @@ return [
             'icon'        => 'far fa-fw fa-file',
             'label_color' => 'success',
             'icon_color' => 'red',
+            'can'  => 'view users',
+            'classes' => 'autenticado',
         ],
         ['header' => 'ADM'],
         [
             'text'        => 'Gerenciar Usuários',
             'url'         => 'users/users',
             'icon_color' => 'cyan',
+            'classes' => 'autenticado',
         ],
     ],
 

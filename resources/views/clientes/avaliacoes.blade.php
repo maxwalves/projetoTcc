@@ -41,7 +41,8 @@
                                         @csrf
                                         <button type="submit" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></button>
                                     </form>
-                                    <button type="button" class="btn btn-success btn-sm"><i class="fas fa-paper-plane"></i></button>
+                                    <a href="{{ url('/clientes/enviarAvaliacao/'.$avaliacao->cliente->id.'/'.$avaliacao->id) }}" class="btn btn-success btn-sm"><i class="fas fa-paper-plane"></i></a>
+                                </div>
                                 </div>
                                 
                             </td>
@@ -50,12 +51,12 @@
                 </tbody>
             </table>
         @else
-            <p>Você ainda não tem avaliações de clientes, <a href="{{ url('/clientes/createAvaliacaoCliente/'.$avaliacao->cliente->id) }}">Criar nova
+            <p>Você ainda não tem avaliações de clientes, <a href="{{ url('/clientes/createAvaliacaoCliente/'.$cliente->id) }}">Criar nova
                     avaliação de cliente</a></p>
         @endif
         <div class="row">
             <div class="col-12 col-xl-4">
-                <a class="btn btn-success btn-lg" href="{{ url('/clientes/createAvaliacaoCliente/'.$avaliacao->cliente->id) }}">Criar nova avaliação de
+                <a class="btn btn-success btn-lg" href="{{ url('/clientes/createAvaliacaoCliente/'.$cliente->id) }}">Criar nova avaliação de
                     cliente</a>
             </div>
         </div>

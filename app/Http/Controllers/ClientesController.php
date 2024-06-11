@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AvaliacaoCliente;
 use App\Models\Cliente;
 use App\Models\FormularioAvaliacao;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Setor;
+use App\Models\Campo;
+use App\Models\Resposta;
 
 class ClientesController extends Controller
 {
@@ -27,9 +30,9 @@ class ClientesController extends Controller
         $usuarios = User::all();
         $setores = Setor::all();
 
-        $clientes = $clientes->filter(function ($cliente) use ($user) {
+        /* $clientes = $clientes->filter(function ($cliente) use ($user) {
             return $cliente->setor_id == $user->setor_id;
-        });
+        }); */
 
         return view('clientes.index', compact('clientes', 'user', 'usuarios', 'setores'));
     }
@@ -53,7 +56,7 @@ class ClientesController extends Controller
         $cliente->setor_id = $request->setor_id;
 
         $cliente->save();
-        
+
         return redirect('/clientes')->with('success', 'Cliente criado com sucesso.');
     }
 
@@ -100,7 +103,6 @@ class ClientesController extends Controller
         return view('clientes.avaliacoes', compact('cliente', 'avaliacoes'));
     }
 
-    //faça uma function para createAvaliacaoCliente
     public function createAvaliacaoCliente($clienteId)
     {
         $cliente = Cliente::findOrFail($clienteId);
@@ -108,4 +110,52 @@ class ClientesController extends Controller
         return view('clientes.createAvaliacaoCliente', compact('cliente', 'formularios'));
     }
 
+    //faça ua rota para paginaEnvioAvaliacao
+    public function paginaEnvioAvaliacao($clienteId, $avaliacaoId)
+    {
+        $cliente = Cliente::findOrFail($clienteId);
+        $avaliacao = AvaliacaoCliente::findOrFail($avaliacaoId);
+
+        // Gerar link do formulário
+        $linkFormulario = url('clientes/formulario/' . $avaliacao->hash);
+
+        // Texto da mensagem
+        $mensagem = 'Por favor, preencha o formulário de satisfação! ' . $linkFormulario;
+
+        // Codificar a mensagem para URL
+        $mensagemCodificada = urlencode($mensagem);
+
+        // Gerar link do WhatsApp
+        $linkWhatsApp = 'https://wa.me/' . $cliente->telefone . '?text=' . $mensagemCodificada;
+
+        return view('clientes.paginaEnvioAvaliacao', compact('cliente', 'avaliacao', 'linkWhatsApp'));
+    }
+
+    public function formularioAvaliacao($hash)
+    {
+        $avaliacao = AvaliacaoCliente::where('hash', $hash)->firstOrFail();
+        $formulario = FormularioAvaliacao::findOrFail($avaliacao->formulario_avaliacao_id);
+        $campos = Campo::where('formulario_avaliacao_id', $formulario->id)->get();
+        return view('clientes.formularioAvaliacao', compact('avaliacao', 'formulario', 'campos'));
+    }
+
+    public function enviarAvaliacao(Request $request, $hash)
+    {
+        $avaliacao = AvaliacaoCliente::where('hash', $hash)->firstOrFail();
+        $campos = Campo::where('formulario_avaliacao_id', $avaliacao->formulario_avaliacao_id)->get();
+
+        foreach ($campos as $campo) {
+            Resposta::create([
+                'data' => now(),
+                'campo_id' => $campo->id,
+                'avaliacao_cliente_id' => $avaliacao->id,
+                'resposta' => $request->input("resposta".$campo->id),
+            ]);
+        }
+
+        $avaliacao->status = 'Concluída';
+        $avaliacao->save();
+
+        return redirect()->route('clientes.formularioAvaliacao', ['hash' => $hash])->with('success', 'Avaliação enviada com sucesso!');
+    }
 }
