@@ -14,7 +14,7 @@ return [
     |
     */
 
-    'title' => 'SatisTracker',
+    'title' => 'SatisfactionTracker',
     'title_prefix' => '',
     'title_postfix' => '',
 
@@ -63,7 +63,7 @@ return [
     |
     */
 
-    'logo' => '<b>Satis</b> Tracker',
+    'logo' => '<b>Satisfaction</b> Tracker',
     'logo_img' => 'img/logo.png',
     'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => null,
